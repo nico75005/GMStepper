@@ -1,3 +1,8 @@
+# Purpose of this fork
+
+Added an itinialValue variable to avoid to trigger actions when setting the value of the stepper.
+
+
 # GMStepper
 [![Version](https://img.shields.io/cocoapods/v/GMStepper.svg?style=flat)](http://cocoapods.org/pods/GMStepper)
 [![License](https://img.shields.io/cocoapods/l/GMStepper.svg?style=flat)](http://cocoapods.org/pods/GMStepper)
