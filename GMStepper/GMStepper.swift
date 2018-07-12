@@ -15,15 +15,18 @@ import UIKit
     private var disableActions: Bool = false
 	
     /// Initial value of the stepper. Defaults to 0.
-    public var initialValue: Double = 0 {
-	didSet {
-	    disableActions = true
-	    value = initialValue
-    	    disableActions = false
+	public var initialValue: Double = 0 {
+		didSet {
+			disableActions = true
+			value = initialValue
+			disableActions = false
+		}
 	}
-    }
 	
-    /// Current value of the stepper. Defaults to 0.
+	/// Handler to be called after an update
+	public var didUpdateHandler: ((Double) -> Void)?
+
+	/// Current value of the stepper. Defaults to 0.
     @objc @IBInspectable public var value: Double = 0 {
         didSet {
             value = min(maximumValue, max(minimumValue, value))
@@ -283,7 +286,7 @@ import UIKit
         }
     }
 
-    /// Timer used for autorepeat option
+	/// Timer used for autorepeat option
     var timer: Timer?
 
     /** When UIStepper reaches its top speed, it alters the value with a time interval of ~0.05 sec.
@@ -347,7 +350,9 @@ import UIKit
             value += stepValue
         } else if stepperState == .ShouldDecrease {
             value -= stepValue
-        }   
+        }
+
+		didUpdateHandler?(value)
     }
 
     deinit {
